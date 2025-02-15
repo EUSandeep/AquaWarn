@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.35806.103 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeloneCulture", "CeloneCulture.csproj", "{900E6A73-351C-45A1-A736-0DABC0380232}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{900E6A73-351C-45A1-A736-0DABC0380232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900E6A73-351C-45A1-A736-0DABC0380232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900E6A73-351C-45A1-A736-0DABC0380232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900E6A73-351C-45A1-A736-0DABC0380232}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9E762AF-5BD2-49F3-8232-927DCB15996A}
+	EndGlobalSection
+EndGlobal
