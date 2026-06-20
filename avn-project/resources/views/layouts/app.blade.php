@@ -120,12 +120,16 @@
             <a href="/">Home</a>
             @auth
                 @if(Auth::user()->isAdmin())
-                    <a href="/admin/dashboard" style="color: #f59e0b;">Admin Panel</a>
+                    <a href="/admin/dashboard" style="color: #f59e0b;">Admin Dashboard</a>
+                    <a href="/admin/nodes/manage">Manage Nodes</a>
                     <a href="/admin/users">Users</a>
+                    <a href="/admin/settings">Settings</a>
                 @endif
                 <a href="/dashboard">Dashboard</a>
                 <a href="/nodes">Nodes</a>
                 <a href="/alerts">Alerts</a>
+                <a href="/reports">Reports</a>
+                <a href="/profile">Profile</a>
                 <form action="/logout" method="POST" style="display:inline">
                     @csrf
                     <button type="submit" style="background:none; border:none; color:white; cursor:pointer; margin-left:20px;">Logout</button>

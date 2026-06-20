@@ -39,3 +39,23 @@ Route::get('/nodes/{id}', function($id) {
 Route::get('/alerts', function() {
     return view('alerts', ['alerts' => \App\Models\Alert::with('telemetryNode')->latest()->get()]);
 })->middleware(['auth', 'user']);
+
+Route::get('/profile', function() {
+    return view('profile', ['user' => Auth::user()]);
+})->middleware(['auth', 'user']);
+
+Route::get('/preferences', function() {
+    return view('preferences');
+})->middleware(['auth', 'user']);
+
+Route::get('/reports', function() {
+    return view('reports');
+})->middleware(['auth', 'user']);
+
+Route::get('/admin/nodes/manage', function () {
+    return view('admin.manage_nodes', ['nodes' => \App\Models\TelemetryNode::all()]);
+})->middleware(['auth', 'admin']);
+
+Route::get('/admin/settings', function () {
+    return view('admin.settings');
+})->middleware(['auth', 'admin']);
