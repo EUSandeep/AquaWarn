@@ -1,0 +1,3 @@
+## 2026-06-16 - [Bulk Database Inserts]
+**Learning:** Using Eloquent's `create()` in a loop for multiple records is significantly slower than using `insert()` for a bulk operation. In this case, 72 records took ~24ms with individual creates vs ~6ms with a single bulk insert (4x speedup).
+**Action:** Always prefer bulk `insert()` or `upsert()` when dealing with multiple related records that don't require individual Eloquent events or specialized model logic during creation. Remember to manually include `created_at` and `updated_at` if they are needed, as `insert()` bypasses Eloquent's automatic timestamp handling.
