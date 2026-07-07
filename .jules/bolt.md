@@ -1,0 +1,3 @@
+## 2025-05-15 - [Database Indexing on Timestamps]
+**Learning:** In hydrometeorological telemetry systems, queries are almost always time-series based (latest data, historical trends). Missing indexes on business timestamp columns (`recorded_at`, `triggered_at`, `forecasted_for`) leads to full table scans as the dataset grows. Laravel's `latest()` defaults to `created_at`, which may not be the intended sort order or the most efficient if an index exists on a different timestamp column.
+**Action:** Always index business-critical timestamp columns and explicitly use them in Eloquent `latest()` or `orderBy()` calls.
