@@ -1,0 +1,3 @@
+## 2026-06-16 - [Batch Insert Optimization in MockForecastingService]
+**Learning:** The `MockForecastingService` was performing 72 individual `Forecast::create` calls in a loop. In Eloquent, each `create` call results in a separate database `INSERT` query, which is highly inefficient for bulk data. Switching to `Forecast::insert()` with an array of records reduces this to a single database transaction.
+**Action:** Always use batch inserts (`insert()`) instead of individual `create()` calls when generating multiple records in a loop, ensuring `created_at` and `updated_at` timestamps are manually provided if needed.
