@@ -1,0 +1,3 @@
+## 2025-05-14 - [Missing indexes on domain-specific timestamp columns]
+**Learning:** In Laravel, `latest()` defaults to `created_at`. If the application uses domain-specific timestamp columns (like `recorded_at`, `forecasted_for`, `triggered_at`) for ordering, these must be explicitly indexed. Without explicit indexes and explicit `latest('column')` calls, queries will not benefit from database optimizations and may result in full table scans as data grows.
+**Action:** Always check for custom timestamp columns used in ordering and ensure they are indexed and explicitly referenced in Eloquent queries.
