@@ -13,6 +13,10 @@ class TelemetryData extends Model
         'telemetry_node_id', 'water_level', 'rainfall', 'battery_voltage', 'recorded_at'
     ];
 
+    protected $casts = [
+        'recorded_at' => 'datetime',
+    ];
+
     public function telemetryNode()
     {
         return $this->belongsTo(TelemetryNode::class);

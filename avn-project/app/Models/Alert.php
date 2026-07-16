@@ -13,6 +13,10 @@ class Alert extends Model
         'telemetry_node_id', 'type', 'severity', 'message', 'triggered_at'
     ];
 
+    protected $casts = [
+        'triggered_at' => 'datetime',
+    ];
+
     public function telemetryNode()
     {
         return $this->belongsTo(TelemetryNode::class);

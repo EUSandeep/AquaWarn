@@ -30,12 +30,14 @@ Route::get('/nodes/{id}', function($id) {
     $node = \App\Models\TelemetryNode::findOrFail($id);
     return view('node_details', [
         'node' => $node,
-        'latest' => $node->telemetryData()->latest()->first(),
-        'historical' => $node->telemetryData()->latest()->take(24)->get()->reverse(),
+        // Optimized: Use indexed 'recorded_at' instead of default 'created_at' for sorting
+        'latest' => $node->telemetryData()->latest('recorded_at')->first(),
+        'historical' => $node->telemetryData()->latest('recorded_at')->take(24)->get()->reverse(),
         'forecast' => $node->forecasts()->orderBy('forecasted_for')->get()
     ]);
 })->middleware(['auth', 'user']);
 
 Route::get('/alerts', function() {
-    return view('alerts', ['alerts' => \App\Models\Alert::with('telemetryNode')->latest()->get()]);
+    // Optimized: Use indexed 'triggered_at' instead of default 'created_at' for sorting
+    return view('alerts', ['alerts' => \App\Models\Alert::with('telemetryNode')->latest('triggered_at')->get()]);
 })->middleware(['auth', 'user']);
