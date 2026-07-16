@@ -1,0 +1,3 @@
+## 2025-05-15 - [Database Indexing for Time-Series Queries]
+**Learning:** In applications handling time-series data, default Eloquent `latest()` calls sort by `created_at`. If the application logically orders data by domain-specific timestamps (e.g., `recorded_at`, `triggered_at`), these columns must be indexed and explicitly passed to `latest()`. Sorting on unindexed columns causes full table scans, which degrade performance linearly with dataset growth.
+**Action:** Always check if `latest()` or `orderBy()` is using an indexed column. If sorting by domain timestamps, ensure an index exists and update the query to `latest('timestamp_column')`.
