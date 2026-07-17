@@ -16,15 +16,25 @@ class MockForecastingService
         // Clear old forecasts for this node
         $node->forecasts()->delete();
 
+        $now = Carbon::now();
+        $forecasts = [];
+
         for ($i = 1; $i <= 72; $i++) {
             // Mock LSTM: slight upward trend with some randomness
             $prediction = $baseLevel + ($i * 0.02) + (rand(-10, 10) / 100);
 
-            Forecast::create([
+            // Using bulk insertion array. We manually add created_at and updated_at
+            // and format all Carbon instances using toDateTimeString() as Eloquent's insert()
+            // bypasses regular model-level serialization and timestamp generation.
+            $forecasts[] = [
                 'telemetry_node_id' => $node->id,
                 'predicted_water_level' => max(0, $prediction),
-                'forecasted_for' => Carbon::now()->addHours($i),
-            ]);
+                'forecasted_for' => $now->copy()->addHours($i)->toDateTimeString(),
+                'created_at' => $now->toDateTimeString(),
+                'updated_at' => $now->toDateTimeString(),
+            ];
         }
+
+        Forecast::insert($forecasts);
     }
 }
