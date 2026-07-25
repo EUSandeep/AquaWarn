@@ -16,15 +16,23 @@ class MockForecastingService
         // Clear old forecasts for this node
         $node->forecasts()->delete();
 
+        $forecasts = [];
+        $nowStr = Carbon::now()->toDateTimeString();
+
         for ($i = 1; $i <= 72; $i++) {
             // Mock LSTM: slight upward trend with some randomness
             $prediction = $baseLevel + ($i * 0.02) + (rand(-10, 10) / 100);
 
-            Forecast::create([
+            $forecasts[] = [
                 'telemetry_node_id' => $node->id,
                 'predicted_water_level' => max(0, $prediction),
-                'forecasted_for' => Carbon::now()->addHours($i),
-            ]);
+                'forecasted_for' => Carbon::now()->addHours($i)->toDateTimeString(),
+                'created_at' => $nowStr,
+                'updated_at' => $nowStr,
+            ];
         }
+
+        // Performance improvement: Use bulk insertion to reduce database roundtrips from 72 to 1 (a ~98% reduction)
+        Forecast::insert($forecasts);
     }
 }
