@@ -13,6 +13,10 @@ class Forecast extends Model
         'telemetry_node_id', 'predicted_water_level', 'forecasted_for'
     ];
 
+    protected $casts = [
+        'forecasted_for' => 'datetime',
+    ];
+
     public function telemetryNode()
     {
         return $this->belongsTo(TelemetryNode::class);
