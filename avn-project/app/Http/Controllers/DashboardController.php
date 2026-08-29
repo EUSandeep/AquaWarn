@@ -16,7 +16,8 @@ class DashboardController extends Controller
             'alertsCount' => Alert::count(),
             'avgWaterLevel' => round(TelemetryData::avg('water_level') ?? 0, 2),
             'nodes' => TelemetryNode::all(),
-            'recentTelemetry' => TelemetryData::with('telemetryNode')->latest()->take(10)->get(),
+            // Optimization: Explicitly query by indexed 'recorded_at' column instead of default 'created_at'
+            'recentTelemetry' => TelemetryData::with('telemetryNode')->latest('recorded_at')->take(10)->get(),
         ]);
     }
 }
